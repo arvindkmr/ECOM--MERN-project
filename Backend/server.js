@@ -6,15 +6,15 @@ dotenv.config({ path: 'backend/config/config.env' });
 
 //database
 mongoose
-  .connect('mongodb://0.0.0.0:27017/')
-  .then(() => {
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+//     useCreateIndex: true,
+  })
+  .then((data) => {
+	console.log(`connected to ${data.connection.host}`)
     //connect server
     app.listen(process.env.PORT);
-  })
-  .then(() => {
-    console.log(
-      `connected to database and listening to port ${process.env.PORT} `
-    );
   })
   .catch((err) => {
     console.log(err);
