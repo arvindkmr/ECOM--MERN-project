@@ -4,9 +4,11 @@ import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
 export const createProduct = async (req, res, next) => {
   const product = await Product.create(req.body);
+  console.log('working');
   res.status(201).json({
     success: true,
     product,
+    co
   });
 };
 
@@ -55,7 +57,13 @@ export const singleProduct = async (req, res, next) => {
 
 //To display all products to user
 export const getAllProduct = async (req, res, next) => {
-  const apiFeature = new ApiFeatures(Product.find(), req.query).search();
+  let resultPerPage = 5;
+    const productsCount = await Product.countDocuments();
+
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
   const products = await apiFeature.query;
   res.status(200).json({ success: true, products });
 };
