@@ -8,7 +8,7 @@ export const createProduct = async (req, res, next) => {
     success: true,
     product,
   });
-}
+};
 
 //unhandled promise rejection
 //update product for Admin only
@@ -55,8 +55,7 @@ export const singleProduct = async (req, res, next) => {
 
 //To display all products to user
 export const getAllProduct = async (req, res, next) => {
-
-  ApiFeatures(Product.find(),req.query.keyword)
-  const products = await Product.find();
+  const apiFeature = new ApiFeatures(Product.find(), req.query).search();
+  const products = await apiFeature.query;
   res.status(200).json({ success: true, products });
 };
