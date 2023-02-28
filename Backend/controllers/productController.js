@@ -1,5 +1,6 @@
 import { Product } from '../model/productModel.js';
-
+import ApiFeatures from '../utils/apiFeatures.js';
+import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
 export const createProduct = async (req, res, next) => {
   const product = await Product.create(req.body);
@@ -7,17 +8,16 @@ export const createProduct = async (req, res, next) => {
     success: true,
     product,
   });
-};
+}
 
+//unhandled promise rejection
 //update product for Admin only
 export const updateProduct = async (req, res, next) => {
   const id = req.params.id;
   let product = await Product.findById(id);
+
   if (!product) {
-    res.status(500).json({
-      success: 'false',
-      message: 'product not found',
-    });
+    return next(new ErrorHandler('product not found', 404));
   }
   product = await Product.findByIdAndUpdate(id, req.body, {
     new: true,
@@ -34,10 +34,7 @@ export const deleteProduct = async (req, res, next) => {
   let product = await Product.findById(id);
 
   if (!product) {
-    res.status(500).json({
-      success: 'false',
-      message: 'product not found',
-    });
+    return next(new ErrorHandler('product not found', 500));
   }
   await product.remove(id);
   res
@@ -50,19 +47,16 @@ export const singleProduct = async (req, res, next) => {
   let product = await Product.findById(id);
 
   if (!product) {
-    res.status(500).json({
-      success: 'false',
-      message: 'product not found',
-    });
+    return next(new ErrorHandler('product not found', 404));
   }
 
-  res
-    .status(200)
-    .json({ sucess: true, product });
+  res.status(200).json({ sucess: true, product });
 };
 
 //To display all products to user
 export const getAllProduct = async (req, res, next) => {
+
+  ApiFeatures(Product.find(),req.query.keyword)
   const products = await Product.find();
   res.status(200).json({ success: true, products });
 };
