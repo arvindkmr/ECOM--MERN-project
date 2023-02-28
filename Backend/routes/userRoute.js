@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser } from '../controllers/userController.js';
+import { registerUser,loginUser,logout } from '../controllers/userController.js';
 
 // const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
 
@@ -7,13 +7,13 @@ const userRoute = express.Router();
 
 userRoute.post('/register', registerUser);
 
-// router.route('/login').post(loginUser);
+userRoute.post('/login',loginUser);
+userRoute.get("/logout",logout)
 
-// router.route('/password/forgot').post(forgotPassword);
+// userRoute.post('/password/forgot',forgotPassword);
 
-// router.route('/password/reset/:token').put(resetPassword);
+// userRoute.route('/password/reset/:token').put(resetPassword);
 
-// router.route('/logout').get(logout);
 
 // router.route('/me').get(isAuthenticatedUser, getUserDetails);
 
