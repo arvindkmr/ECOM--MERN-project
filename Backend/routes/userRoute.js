@@ -1,21 +1,21 @@
 import express from 'express';
-import { registerUser,loginUser,logout } from '../controllers/userController.js';
+import {
+  registerUser,
+  loginUser,
+  logout,
+  getUserDetails,
+} from '../controllers/userController.js';
 
-// const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
+import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth';
 
 const userRoute = express.Router();
 
 userRoute.post('/register', registerUser);
 
-userRoute.post('/login',loginUser);
-userRoute.get("/logout",logout)
+userRoute.post('/login', loginUser);
+userRoute.get('/logout', logout);
 
-// userRoute.post('/password/forgot',forgotPassword);
-
-// userRoute.route('/password/reset/:token').put(resetPassword);
-
-
-// router.route('/me').get(isAuthenticatedUser, getUserDetails);
+userRoute.get('/me', isAuthenticatedUser, getUserDetails);
 
 // router.route('/password/update').put(isAuthenticatedUser, updatePassword);
 
