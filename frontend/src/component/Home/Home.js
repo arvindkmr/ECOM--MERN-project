@@ -1,25 +1,25 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import "./Home.css";
-import ProductCard from "./ProductCart";
+import './Home.css';
+import ProductCard from './ProductCart';
 import MetaData from '../layout/metaData.js';
-// import { clearErrors, getProduct } from "../../actions/productAction";
-// import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from '../../actions/productActions';
+import { useSelector, useDispatch } from "react-redux";
 import Loader from '../layout/Loader/Loader';
 // import { useAlert } from "react-alert";
 
 const Home = () => {
   //   const alert = useAlert();
-  //   const dispatch = useDispatch();
+    const dispatch = useDispatch();
   //   const { loading, error, products } = useSelector((state) => state.products);
   const [loading, setLoading] = useState(false);
-  const [products,setProducts]= useState([])
-  //   useEffect(() => {
-  //     if (error) {
-  //       alert.error(error);
-  //       dispatch(clearErrors());
-  //     }
-  //     dispatch(getProduct());
-  //   }, [dispatch, error, alert]);
+  const [products, setProducts] = useState([]);
+    useEffect(() => {
+      // if (error) {
+      //   alert.error(error);
+      //   dispatch(clearErrors());
+      // }
+      dispatch(getProduct());
+    }, [dispatch]);
 
   return (
     <Fragment>
@@ -37,7 +37,7 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
 
           <div className="container" id="container">
-                <ProductCard  />
+            <ProductCard />
             {/* {products &&
               products.map((product) => (
               ))} */}

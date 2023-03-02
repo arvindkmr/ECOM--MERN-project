@@ -3,13 +3,11 @@ import ApiFeatures from '../utils/apiFeatures.js';
 import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
 export const createProduct = async (req, res, next) => {
-  req.body.user= req.user.id
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
-  console.log('working');
   res.status(201).json({
     success: true,
     product,
-    co
   });
 };
 
@@ -59,7 +57,7 @@ export const singleProduct = async (req, res, next) => {
 //To display all products to user
 export const getAllProduct = async (req, res, next) => {
   let resultPerPage = 5;
-    const productsCount = await Product.countDocuments();
+  const productsCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
