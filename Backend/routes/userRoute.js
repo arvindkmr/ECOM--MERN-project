@@ -6,15 +6,13 @@ import {
   getUserDetails,
 } from '../controllers/userController.js';
 
-import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth';
+import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';
 
 const userRoute = express.Router();
 
 userRoute.post('/register', registerUser);
-
 userRoute.post('/login', loginUser);
 userRoute.get('/logout', logout);
-
 userRoute.get('/me', isAuthenticatedUser, getUserDetails);
 
 // router.route('/password/update').put(isAuthenticatedUser, updatePassword);
