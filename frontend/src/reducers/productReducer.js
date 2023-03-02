@@ -38,18 +38,46 @@ import {
 export const productReducer = (state = { product: [] }, action) => {
   switch (action.type) {
     case  ALL_PRODUCT_REQUEST:
-      return { loading: true, product: [] };
+      return { loading: true, products: [] };
     case ALL_PRODUCT_SUCCESS:
       return {
         loading: false,
-        product: action.payload.products, 
-        productCount: action.payload.productsCount,
+        products: action.payload.products, 
+        productsCount: action.payload.productsCount,
       };
     case ALL_PRODUCT_FAIL:
       return { loading: false, error: action.payload };
     case CLEAR_ERRORS:
       return { ...state, error: null };
 
+    default:
+      return state;
+  }
+};
+
+export const productDetailsReducer = (state = { product: {} }, action) => {
+  switch (action.type) {
+    case PRODUCT_DETAILS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+    case PRODUCT_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        product: action.payload,
+      };
+    case PRODUCT_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }

@@ -3,23 +3,26 @@ import './Home.css';
 import ProductCard from './ProductCart';
 import MetaData from '../layout/metaData.js';
 import { getProduct } from '../../actions/productActions';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
-// import { useAlert } from "react-alert";
+import { toast, ToastContainer } from 'react-toastify';
 
 const Home = () => {
   //   const alert = useAlert();
-    const dispatch = useDispatch();
-  //   const { loading, error, products } = useSelector((state) => state.products);
-  const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-    useEffect(() => {
-      // if (error) {
-      //   alert.error(error);
-      //   dispatch(clearErrors());
-      // }
-      dispatch(getProduct());
-    }, [dispatch]);
+  const dispatch = useDispatch();
+  const { loading, error, products, productsCount } = useSelector(
+    (state) => state.products
+  );
+  const notify = () => {
+    toast.error('Error Occurred !');
+  };
+  useEffect(() => {
+    if (error) {
+      toast.error(`${error}`);
+      // dispatch(clearErrors());
+    }
+    dispatch(getProduct());
+  }, [dispatch,error]);
 
   return (
     <Fragment>
@@ -28,19 +31,16 @@ const Home = () => {
       ) : (
         <Fragment>
           <MetaData title="Arvind Baloda- Ecom - MERN stack" />
-
           <div className="banner">
             <p>Welcome to Ecommerce</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>
           </div>
-
           <h2 className="homeHeading">Featured Products</h2>
-
+          <button onClick={notify}>Notify</button>;
+          <ToastContainer />
           <div className="container" id="container">
-            <ProductCard />
-            {/* {products &&
-              products.map((product) => (
-              ))} */}
+            {products &&
+              products.map((product) => <ProductCard product={product} />)}
           </div>
         </Fragment>
       )}
