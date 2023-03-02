@@ -32,19 +32,20 @@ import {
   DELETE_REVIEW_FAIL,
   DELETE_REVIEW_RESET,
   CLEAR_ERRORS,
-} from "../constants/productConstants";
+  
+} from "../constants/productConstants.js";
 
 export const productReducer = (state = { product: [] }, action) => {
   switch (action.type) {
-    case All_PRODUCT_REQUEST:
+    case  ALL_PRODUCT_REQUEST:
       return { loading: true, product: [] };
-    case All_PRODUCT_SUCCESS:
+    case ALL_PRODUCT_SUCCESS:
       return {
         loading: false,
-        product: action.payload.products,
+        product: action.payload.products, 
         productCount: action.payload.productsCount,
       };
-    case All_PRODUCT_FAIL:
+    case ALL_PRODUCT_FAIL:
       return { loading: false, error: action.payload };
     case CLEAR_ERRORS:
       return { ...state, error: null };
