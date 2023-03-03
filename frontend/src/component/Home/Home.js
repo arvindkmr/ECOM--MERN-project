@@ -8,7 +8,6 @@ import Loader from '../layout/Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Home = () => {
-  //   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products, productsCount } = useSelector(
     (state) => state.products
@@ -22,7 +21,7 @@ const Home = () => {
       // dispatch(clearErrors());
     }
     dispatch(getProduct());
-  }, [dispatch,error]);
+  }, [dispatch, error]);
 
   return (
     <Fragment>

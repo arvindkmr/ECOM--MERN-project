@@ -1,14 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProduct } from "../../actions/productAction";
-import Loader from "../layout/Loader/Loader";
-import ProductCard from "../Home/ProductCard";
+import { clearErrors, getProduct } from "../../actions/productActions.js"
+import Loader from "../layout/Loader/Loader.js"
+import ProductCard from "../Home/ProductCart.js"
 import Pagination from "react-js-pagination";
-import Slider from "@material-ui/core/Slider";
-import { useAlert } from "react-alert";
-import Typography from "@material-ui/core/Typography";
-import MetaData from "../layout/MetaData";
+import MetaData from "../layout/metaData.js";
+// import { toast } from "react-toastify";
 
 const categories = [
   "Laptop",
@@ -23,7 +21,7 @@ const categories = [
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
-  const alert = useAlert();
+  
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
@@ -53,7 +51,7 @@ const Products = ({ match }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // toast.error(error);
       dispatch(clearErrors());
     }
 
@@ -77,17 +75,10 @@ const Products = ({ match }) => {
           </div>
 
           <div className="filterBox">
-            <Typography>Price</Typography>
-            <Slider
-              value={price}
-              onChange={priceHandler}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              min={0}
-              max={25000}
-            />
+            <p>Price</p>
+            
 
-            <Typography>Categories</Typography>
+            <p>Categories</p>
             <ul className="categoryBox">
               {categories.map((category) => (
                 <li
@@ -101,17 +92,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              <Typography component="legend">Ratings Above</Typography>
-              <Slider
-                value={ratings}
-                onChange={(e, newRating) => {
-                  setRatings(newRating);
-                }}
-                aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
-                min={0}
-                max={5}
-              />
+              <p> Ratings Above</p>
+              
             </fieldset>
           </div>
           {resultPerPage < count && (

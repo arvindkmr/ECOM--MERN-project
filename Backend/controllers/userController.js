@@ -1,7 +1,6 @@
 import { User } from '../model/userModel.js';
 import { sendToken } from '../utils/jwtToken.js';
 import ErrorHandler from '../utils/errorHandler.js';
-import { sendEmail } from '../utils/sendEmail.js';
 //register a user
 export const registerUser = async (req, res, next) => {
   //   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -62,7 +61,6 @@ export const logout = async (req, res, next) => {
     message: 'Logged Out',
   });
 };
-
 
 // Get User Detail
 export const getUserDetails = async (req, res, next) => {

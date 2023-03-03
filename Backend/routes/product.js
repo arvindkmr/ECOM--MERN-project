@@ -8,7 +8,7 @@ import {
 } from '../controllers/productController.js';
 import { authorizeRoles, isAuthenticatedUser } from '../MiddleWare/auth.js';
 
-const productRoute = express.Router();
+const productRoute = express.Router(); 
 
 productRoute.get('/products', getAllProduct);
 productRoute.post('/product/new',isAuthenticatedUser,createProduct);
