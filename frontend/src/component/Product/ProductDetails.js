@@ -13,12 +13,11 @@ const ProductDetails = ({ match }) => {
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
-  console.log(product)
 
   return (
     <div>
       <div>{product && product.name}</div>
-      ProductDetails
+      <div>ProductDetails</div>
     </div>
   );
 };

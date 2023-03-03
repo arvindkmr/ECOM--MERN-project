@@ -1,31 +1,30 @@
-import React, { Fragment, useEffect, useState } from "react";
-import "./Products.css";
-import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProduct } from "../../actions/productActions.js"
-import Loader from "../layout/Loader/Loader.js"
-import ProductCard from "../Home/ProductCart.js"
-import Pagination from "react-js-pagination";
-import MetaData from "../layout/metaData.js";
+import React, { Fragment, useEffect, useState } from 'react';
+import './Products.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearErrors, getProduct } from '../../actions/productActions.js';
+import Loader from '../layout/Loader/Loader.js';
+import ProductCard from '../Home/ProductCart.js';
+import Pagination from 'react-js-pagination';
+import MetaData from '../layout/metaData.js';
+import { useParams } from 'react-router-dom';
 // import { toast } from "react-toastify";
 
 const categories = [
-  "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Camera",
-  "SmartPhones",
+  'Laptop',
+  'Footwear',
+  'Bottom',
+  'Tops',
+  'Attire',
+  'Camera',
+  'SmartPhones',
 ];
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
-  
-
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
 
   const [ratings, setRatings] = useState(0);
 
@@ -37,8 +36,8 @@ const Products = ({ match }) => {
     resultPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
-
-  const keyword = match.params.keyword;
+  const params = useParams();
+  const keyword = params.keyword;
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -48,7 +47,7 @@ const Products = ({ match }) => {
     setPrice(newPrice);
   };
   let count = filteredProductsCount;
-
+  console.log('Products file');
   useEffect(() => {
     if (error) {
       // toast.error(error);
@@ -65,18 +64,8 @@ const Products = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title="PRODUCTS -- ECOMMERCE" />
-          <h2 className="productsHeading">Products</h2>
-
-          <div className="products">
-            {products &&
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-          </div>
-
           <div className="filterBox">
             <p>Price</p>
-            
 
             <p>Categories</p>
             <ul className="categoryBox">
@@ -93,9 +82,17 @@ const Products = ({ match }) => {
 
             <fieldset>
               <p> Ratings Above</p>
-              
             </fieldset>
           </div>
+          <h2 className="productsHeading">Products</h2>
+
+          <div className="products">
+            {products &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+          </div>
+
           {resultPerPage < count && (
             <div className="paginationBox">
               <Pagination
