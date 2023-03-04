@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import './Home.css';
 import ProductCard from './ProductCart';
-import MetaData from '../layout/metaData.js';
+import MetaData from '../layout/MetaData.js';
 import { getProduct } from '../../actions/productActions';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
@@ -12,6 +12,7 @@ const Home = () => {
   const { loading, error, products, productsCount } = useSelector(
     (state) => state.products
   );
+  console.log(productsCount,products)
   const notify = () => {
     toast.error('Error Occurred !');
   };

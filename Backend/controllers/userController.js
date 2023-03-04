@@ -1,4 +1,4 @@
-import { User } from '../model/userModel.js';
+import { User } from "../models/userModel.js"
 import { sendToken } from '../utils/jwtToken.js';
 import ErrorHandler from '../utils/errorHandler.js';
 //register a user

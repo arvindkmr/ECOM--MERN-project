@@ -5,7 +5,7 @@ import { clearErrors, getProduct } from '../../actions/productActions.js';
 import Loader from '../layout/Loader/Loader.js';
 import ProductCard from '../Home/ProductCart.js';
 import Pagination from 'react-js-pagination';
-import MetaData from '../layout/metaData.js';
+import MetaData from '../layout/MetaData.js';
 import { useParams } from 'react-router-dom';
 // import { toast } from "react-toastify";
 
@@ -19,13 +19,13 @@ const categories = [
   'SmartPhones',
 ];
 
-const Products = ({ match }) => {
+const Products = () => {
   const dispatch = useDispatch();
-
+  const params = useParams();
+  const keyword = params.keyword;
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState('');
-
   const [ratings, setRatings] = useState(0);
 
   const {
@@ -36,8 +36,6 @@ const Products = ({ match }) => {
     resultPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
-  const params = useParams();
-  const keyword = params.keyword;
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -47,13 +45,12 @@ const Products = ({ match }) => {
     setPrice(newPrice);
   };
   let count = filteredProductsCount;
-  console.log('Products file');
+
   useEffect(() => {
     if (error) {
       // toast.error(error);
       dispatch(clearErrors());
     }
-
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 

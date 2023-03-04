@@ -1,45 +1,29 @@
-import React from 'react';
-import { ReactNavbar } from 'overlay-navbar';
-import logo from '../../../images/1.jpg';
-import { FaBeer } from 'react-icons/fa';
-// import {AiOutlineSearch} from "react-icons/fa"
-const options = {
-  burgerColorHover: '#eb4034',
-  logo,
-  logoWidth: '20vmax',
-  navColor1: 'white',
-  logoHoverSize: '10px',
-  logoHoverColor: '#eb4034',
-  link1Text: 'Home',
-  link2Text: 'Products',
-  link3Text: 'Contact',
-  link4Text: 'About',
-  link1Url: '/',
-  link2Url: '/products',
-  link3Url: '/contact',
-  link4Url: '/about',
-  link1Size: '1.3vmax',
-  link1Color: 'rgba(35, 35, 35,0.8)',
-  nav1justifyContent: 'flex-end',
-  nav2justifyContent: 'flex-end',
-  nav3justifyContent: 'flex-start',
-  nav4justifyContent: 'flex-start',
-  link1ColorHover: '#eb4034',
-  link1Margin: '1vmax',
-  // profileIcon: true,
-  profileIconSize: '2.5vmax',
-  profileIconUrl: '/login',
-  profileIconColor: 'rgba(35, 35, 35,0.8)',
-  searchIconColor: 'rgba(35, 35, 35,0.8)',
-  cartIconColor: 'rgba(35, 35, 35,0.8)',
-  profileIconColorHover: '#eb4034',
-  searchIconColorHover: '#eb4034',
-  cartIconColorHover: '#eb4034',
-  cartIconMargin: '1vmax',
-};
-
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { useEffect, useLayoutEffect } from 'react';
+import './Header.css';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 const Header = () => {
-  return <ReactNavbar {...options} > <FaBeer /> aaa</ReactNavbar>;
+ 
+  return (
+    <div className="header">
+      <Link className="productCard" to={`/testCrossCheck`}>
+        About
+      </Link>
+      <Link className="productCard" to={`/test`}>
+        Contact
+      </Link>
+      <Link className="productCard" to={`/testCrossCheck`}>
+        Products
+      </Link>
+      <Link className="productCard" to={`/search`}>
+        <AiOutlineSearch />
+      </Link>
+    </div>
+  );
 };
 
 export default Header;

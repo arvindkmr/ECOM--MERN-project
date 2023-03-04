@@ -1,4 +1,4 @@
-import { Product } from '../model/productModel.js';
+import { Product } from "../models/productModel.js"
 import ApiFeatures from '../utils/apiFeatures.js';
 import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
@@ -58,7 +58,6 @@ export const singleProduct = async (req, res, next) => {
 export const getAllProduct = async (req, res, next) => {
   let resultPerPage = 10;
   const productsCount = await Product.countDocuments();
-
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
