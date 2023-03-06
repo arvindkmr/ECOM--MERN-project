@@ -12,7 +12,6 @@ const Home = () => {
   const { loading, error, products, productsCount } = useSelector(
     (state) => state.products
   );
-  console.log(productsCount,products)
   const notify = () => {
     toast.error('Error Occurred !');
   };

@@ -56,12 +56,13 @@ export const singleProduct = async (req, res, next) => {
 
 //Get - To display all products to user
 export const getAllProduct = async (req, res, next) => {
-  let resultPerPage = 10;
+  let resultPerPage = 1000;
   const productsCount = await Product.countDocuments();
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
+    console.log(Product,"controller")
   const products = await apiFeature.query;
   res.status(200).json({ success: true, products , productsCount});
 };

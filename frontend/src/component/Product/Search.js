@@ -2,9 +2,9 @@ import React, { useState, Fragment } from 'react';
 import MetaData from '../layout/MetaData.js';
 import './Search.css';
 
-const Search = ({ history }) => {
+const Search = () => {
   const [keyword, setKeyword] = useState('');
-  console.log(history);
+  
   const searchSubmitHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
