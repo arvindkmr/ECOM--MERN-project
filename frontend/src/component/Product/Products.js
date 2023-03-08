@@ -27,7 +27,6 @@ const Products = () => {
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState('');
   const [ratings, setRatings] = useState(0);
-
   const {
     products,
     loading,
@@ -36,6 +35,7 @@ const Products = () => {
     resultPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
+
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -53,7 +53,6 @@ const Products = () => {
     }
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
-
   return (
     <Fragment>
       {loading ? (
@@ -63,7 +62,6 @@ const Products = () => {
           <MetaData title="PRODUCTS -- ECOMMERCE" />
           <div className="filterBox">
             <p>Price</p>
-
             <p>Categories</p>
             <ul className="categoryBox">
               {categories.map((category) => (

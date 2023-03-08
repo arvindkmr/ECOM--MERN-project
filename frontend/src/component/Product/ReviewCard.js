@@ -1,9 +1,10 @@
 import React from 'react';
-import profilePng from '../../images/Profile.png';
+import profilePng from "../../images/1.jpg"
 
 const ReviewCard = ({ review }) => {
   return (
     <div className="reviewCard">
+    helo
       <img src={profilePng} alt="User" />
       <p>{review.name}</p>
       <span className="reviewCardComment">{review.comment}</span>
