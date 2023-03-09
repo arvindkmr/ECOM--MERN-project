@@ -5,11 +5,13 @@ import userRoute from './routes/userRoute.js';
 import paymentRoute from './routes/paymentRoute.js';
 import orderRoute from './routes/orderRoute.js';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(bodyParser.urlencoded({ extended: true }));
 //routes import
 app.use('/api/v1', productRoute);
 app.use('/api/v1', userRoute);
