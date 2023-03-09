@@ -9,7 +9,7 @@ import MetaData from "../layout/MetaData";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  // const alert = useAlert();
 
   const { error, message, loading } = useSelector(
     (state) => state.forgotPassword

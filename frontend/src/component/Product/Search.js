@@ -1,17 +1,16 @@
 import React, { useState, Fragment } from 'react';
 import MetaData from '../layout/MetaData.js';
 import './Search.css';
-
+import { useNavigate } from 'react-router-dom';
 const Search = () => {
   const [keyword, setKeyword] = useState('');
-  
+  const navigate = useNavigate();
   const searchSubmitHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-      window.location.href=`http://localhost:3000/products/${keyword}`;
+      navigate(`/products/${keyword}`);
     } else {
-      
-      window.location.href=`http://localhost:3000/products/`;
+      navigate(`/products`);
     }
   };
 

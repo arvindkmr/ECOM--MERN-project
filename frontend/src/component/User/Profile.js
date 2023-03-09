@@ -2,17 +2,17 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Profile.css";
 
 const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-
+const navigate = useNavigate()
   useEffect(() => {
     if (isAuthenticated === false) {
-      history.push("/login");
+      navigate('/login')
     }
-  }, [history, isAuthenticated]);
+  }, [ isAuthenticated]);
   return (
     <Fragment>
       {loading ? (
@@ -42,7 +42,7 @@ const Profile = ({ history }) => {
 
               <div>
                 <Link to="/orders">My Orders</Link>
-                <Link to="/password/update">Change Password</Link>
+                <Link >Change Password</Link>
               </div>
             </div>
           </div>

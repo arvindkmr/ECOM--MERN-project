@@ -4,14 +4,14 @@ import Loader from '../layout/Loader/Loader';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, login, register } from '../../actions/userAction.js';
-
+import { useNavigate} from 'react-router-dom';
 const LoginSignUp = ({ history, location }) => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("error");
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  // const { error,loading, isAuthenticated } = useSelector((state) => state.user);
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -74,10 +74,10 @@ const LoginSignUp = ({ history, location }) => {
     }
 
     if (isAuthenticated) {
-      // history.push(redirect);
+        navigate('/account')
     }
-  // }, [dispatch, error, alert, history, isAuthenticated, redirect]);
-  }, [dispatch, error, alert, history, isAuthenticated]);
+    // }, [dispatch, error, alert, history, isAuthenticated, redirect]);
+  }, [dispatch, error, isAuthenticated]);
 
   const switchTabs = (e, tab) => {
     if (tab === 'login') {
