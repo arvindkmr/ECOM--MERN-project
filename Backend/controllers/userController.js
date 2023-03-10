@@ -5,7 +5,6 @@ import ErrorHandler from '../utils/errorHandler.js';
 //register a user
 export const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
-console.log(req.body)
   const user = await User.create({
     name,
     email,

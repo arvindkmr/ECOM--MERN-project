@@ -1,18 +1,18 @@
-import React, { Fragment, useEffect } from "react";
-import { useSelector } from "react-redux";
-import MetaData from "../layout/MetaData";
-import Loader from "../layout/Loader/Loader";
-import { Link,useNavigate } from "react-router-dom";
-import "./Profile.css";
-
-const Profile = ({ history }) => {
+import React, { Fragment, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import MetaData from '../layout/MetaData';
+import Loader from '../layout/Loader/Loader';
+import { Link, useNavigate } from 'react-router-dom';
+import './Profile.css';
+import profilePic from "../../images/1.jpg"
+const Profile = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticated === false) {
-      navigate('/login')
+      navigate('/login');
     }
-  }, [ isAuthenticated]);
+  }, [isAuthenticated]);
   return (
     <Fragment>
       {loading ? (
@@ -23,6 +23,7 @@ const navigate = useNavigate()
           <div className="profileContainer">
             <div>
               <h1>My Profile</h1>
+              <img src={profilePic}  />
               <Link to="/me/update">Edit Profile</Link>
             </div>
             <div>
@@ -41,7 +42,7 @@ const navigate = useNavigate()
 
               <div>
                 <Link to="/orders">My Orders</Link>
-                <Link >Change Password</Link>
+                <Link>Change Password</Link>
               </div>
             </div>
           </div>
