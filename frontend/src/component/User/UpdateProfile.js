@@ -8,22 +8,21 @@ import MetaData from '../layout/MetaData';
 import { useNavigate } from 'react-router-dom';
 
 const UpdateProfile = () => {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
+  
   const updateProfileSubmit = (e) => {
     e.preventDefault();
-
     const myForm = new FormData();
-
     myForm.set('name', name);
     myForm.set('email', email);
     dispatch(updateProfile(myForm));
   };
+
 
   useEffect(() => {
     if (user) {
@@ -46,7 +45,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, alert, user, isUpdated]);
   return (
     <Fragment>
       {loading ? (
@@ -64,7 +63,6 @@ const UpdateProfile = () => {
                 onSubmit={updateProfileSubmit}
               >
                 <div className="updateProfileName">
-
                   <input
                     type="text"
                     placeholder="Name"
