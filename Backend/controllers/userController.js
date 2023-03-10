@@ -2,27 +2,14 @@ import { User } from '../models/userModel.js';
 import { sendToken } from '../utils/jwtToken.js';
 import ErrorHandler from '../utils/errorHandler.js';
 
-
 //register a user
 export const registerUser = async (req, res, next) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: 'avatars',
-    width: 150,
-    crop: 'scale',
-  });
-
   const { name, email, password } = req.body;
-
+console.log(req.body)
   const user = await User.create({
     name,
     email,
     password,
-    avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url,
-      public_id: 'this is temporary',
-      url: 'this is temporary',
-    },
   });
   sendToken(user, 201, res);
 };
@@ -101,25 +88,6 @@ export const updateProfile = async (req, res, next) => {
     email: req.body.email,
   };
 
-  if (req.body.avatar !== '') {
-    const user = await User.findById(req.user.id);
-
-    const imageId = user.avatar.public_id;
-
-    await cloudinary.v2.uploader.destroy(imageId);
-
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: 'avatars',
-      width: 150,
-      crop: 'scale',
-    });
-
-    newUserData.avatar = {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    };
-  }
-
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
@@ -185,8 +153,6 @@ export const deleteUser = async (req, res, next) => {
       new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400)
     );
   }
-
-  const imageId = user.avatar.public_id;
 
   await cloudinary.v2.uploader.destroy(imageId);
 

@@ -2,7 +2,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { AiOutlineLogin } from 'react-icons/ai';
 
 import { useEffect, useLayoutEffect } from 'react';
 import './Header.css';
@@ -25,8 +24,9 @@ const Header = () => {
         <AiOutlineSearch />
       </Link>
       <Link className="productCard" to={`/login`}>
-        <AiOutlineLogin />
+         Login
       </Link>
+      
     </div>
   );
 };

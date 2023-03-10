@@ -62,12 +62,12 @@ export const register = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
 
-    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+    const config = { headers: { 'Content-Type': 'application/json' } };
 
-    // console.log( "before")
     const { data } = await axios.post(`/api/v1/register`, userData, config);
-    console.log(data, "after")
+    console.log( data)
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
@@ -82,7 +82,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_REQUEST });
 
     const { data } = await axios.get(`/api/v1/me`);
-
+    console.log(data)
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });

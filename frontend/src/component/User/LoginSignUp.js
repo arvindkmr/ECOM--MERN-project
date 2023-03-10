@@ -4,9 +4,9 @@ import Loader from '../layout/Loader/Loader';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, login, register } from '../../actions/userAction.js';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const LoginSignUp = ({ history, location }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { error, loading, isAuthenticated } = useSelector(
@@ -28,9 +28,6 @@ const LoginSignUp = ({ history, location }) => {
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState('/Profile.png');
-  const [avatarPreview, setAvatarPreview] = useState('/Profile.png');
-
   const loginSubmit = (e) => {
     e.preventDefault();
     dispatch(login(loginEmail, loginPassword));
@@ -38,32 +35,15 @@ const LoginSignUp = ({ history, location }) => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
-
     const myForm = new FormData();
-
     myForm.set('name', name);
     myForm.set('email', email);
     myForm.set('password', password);
-    myForm.set('avatar', avatar);
-    // console.log(name, email , password, avatar)
     dispatch(register(myForm));
   };
 
   const registerDataChange = (e) => {
-    if (e.target.name === 'avatar') {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    }
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   // const redirect = location.search ? location.search.split('=')[1] : '/account';
@@ -75,7 +55,7 @@ const LoginSignUp = ({ history, location }) => {
     }
 
     if (isAuthenticated) {
-        navigate('/account')
+      navigate('/account');
     }
     // }, [dispatch, error, alert, history, isAuthenticated, redirect]);
   }, [dispatch, error, isAuthenticated]);
@@ -171,15 +151,7 @@ const LoginSignUp = ({ history, location }) => {
                   />
                 </div>
 
-                <div id="registerImage">
-                  <img src={avatarPreview} alt="Avatar Preview" />
-                  <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    onChange={registerDataChange}
-                  />
-                </div>
+                <div id="registerImage"></div>
                 <input type="submit" value="Register" className="signUpBtn" />
               </form>
             </div>
