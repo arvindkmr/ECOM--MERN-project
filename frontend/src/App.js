@@ -9,6 +9,7 @@ import Products from './component/Product/Products.js';
 import Search from './component/Product/Search.js';
 import LoginSignUp from './component/User/LoginSignUp';
 import Profile from './component/User/Profile';
+import UpdateProfile  from "./component/User/UpdateProfile"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store';
 import { loadUser } from './actions/userAction';
@@ -41,6 +42,7 @@ const App = () => {
         <Route exact path="/search" element={<Search />} />
         <Route exact path="/login" element={<LoginSignUp />} />
         <Route exact path="/account" element={<ProtectedRoute component={Profile} />} />
+        <Route exact path="/me/update" element={<ProtectedRoute component={UpdateProfile} />} />
       </Routes>
       <Footer />
     </Router>

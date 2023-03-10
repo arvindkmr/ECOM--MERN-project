@@ -6,6 +6,9 @@ import {
   getUserDetails,
   updateProfile,
   deleteUser,
+  getAllUser,
+  getSingleUser,
+  updateUserRole
 } from '../controllers/userController.js';
 
 import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';

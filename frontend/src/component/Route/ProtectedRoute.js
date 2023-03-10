@@ -13,7 +13,7 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
     return <Navigate to="/login" />;
   }
   return (
-    <Fragment>{loading === false ? <Component {...rest} /> : null}</Fragment>
+    <>{loading === false ? <Component {...rest} /> : null}</>
   );
 };
 
