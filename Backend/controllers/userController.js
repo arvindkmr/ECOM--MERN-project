@@ -153,8 +153,6 @@ export const deleteUser = async (req, res, next) => {
     );
   }
 
-  await cloudinary.v2.uploader.destroy(imageId);
-
   await user.remove();
 
   res.status(200).json({

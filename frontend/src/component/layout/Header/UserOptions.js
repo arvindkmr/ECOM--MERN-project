@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from '../../../actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { loop } from '@cloudinary/url-gen/actions/effect';
 
 const UserOptions = ({ user }) => {
   // const { cartItems } = useSelector((state) => state.cart);
