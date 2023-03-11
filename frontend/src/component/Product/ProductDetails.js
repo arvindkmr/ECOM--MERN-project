@@ -28,7 +28,7 @@ const ProductDetails = ({ match }) => {
   };
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) return;
+    if (product.stock <= quantity) return;
 
     const qty = quantity + 1;
     setQuantity(qty);
