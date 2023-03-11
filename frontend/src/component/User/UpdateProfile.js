@@ -23,7 +23,6 @@ const UpdateProfile = () => {
     dispatch(updateProfile(myForm));
   };
 
-
   useEffect(() => {
     if (user) {
       setName(user.name);

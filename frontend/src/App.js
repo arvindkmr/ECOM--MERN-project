@@ -8,7 +8,9 @@ import ProductDetails from './component/Product/ProductDetails.js';
 import Products from './component/Product/Products.js';
 import Search from './component/Product/Search.js';
 import LoginSignUp from './component/User/LoginSignUp';
+import ForgotPassword from './component/User/ForgotPassword';
 import Profile from './component/User/Profile';
+import UpdatePassword from './component/User/UpdatePassword';
 import UpdateProfile  from "./component/User/UpdateProfile"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store';
@@ -43,6 +45,8 @@ const App = () => {
         <Route exact path="/login" element={<LoginSignUp />} />
         <Route exact path="/account" element={<ProtectedRoute component={Profile} />} />
         <Route exact path="/me/update" element={<ProtectedRoute component={UpdateProfile} />} />
+        <Route exact path="/password/update" element={<ProtectedRoute component={UpdatePassword} />} />
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
       </Routes>
       <Footer />
     </Router>

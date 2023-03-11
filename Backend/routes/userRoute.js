@@ -8,7 +8,8 @@ import {
   deleteUser,
   getAllUser,
   getSingleUser,
-  updateUserRole
+  updateUserRole,
+  updatePassword
 } from '../controllers/userController.js';
 
 import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';
@@ -21,7 +22,7 @@ userRoute.get('/logout', logout);
 userRoute.get('/me', isAuthenticatedUser, getUserDetails);
 userRoute.put('/me/update', isAuthenticatedUser, updateProfile);
 
-// router.route('/password/update').put(isAuthenticatedUser, updatePassword);
+userRoute.put('/password/update', isAuthenticatedUser, updatePassword);
 
 userRoute.get(
   '/admin/users',
@@ -36,7 +37,17 @@ userRoute.get(
   authorizeRoles('admin'),
   getSingleUser
 );
-userRoute.put('/admin/user/:id',isAuthenticatedUser, authorizeRoles('admin'), updateUserRole);
-userRoute.delete('/admin/user/:id',isAuthenticatedUser, authorizeRoles('admin'), deleteUser);
+userRoute.put(
+  '/admin/user/:id',
+  isAuthenticatedUser,
+  authorizeRoles('admin'),
+  updateUserRole
+);
+userRoute.delete(
+  '/admin/user/:id',
+  isAuthenticatedUser,
+  authorizeRoles('admin'),
+  deleteUser
+);
 
 export default userRoute;
