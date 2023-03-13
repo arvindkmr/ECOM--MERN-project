@@ -18,6 +18,8 @@ import { loadUser } from './actions/userAction';
 import UserOptions from './component/layout/Header/UserOptions';
 import { useSelector } from 'react-redux';
 import ProtectedRoute from './component/Route/ProtectedRoute';
+import Cart from './component/Cart/Cart';
+import NotFound from './component/layout/Not Found/NotFound'
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => {
     
@@ -31,13 +33,16 @@ const App = () => {
     });
     store.dispatch(loadUser());
   }, []);
+    window.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <Router>
       <Header />
 
       {isAuthenticated && <UserOptions user={user} />}
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route exact path="/product/:id" element={<ProductDetails />} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
@@ -47,6 +52,8 @@ const App = () => {
         <Route exact path="/me/update" element={<ProtectedRoute component={UpdateProfile} />} />
         <Route exact path="/password/update" element={<ProtectedRoute component={UpdatePassword} />} />
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route exact path="/cart" element={< Cart/>} />
+        <Route path='*' element={ window.location.pathname === "/process/payment" ? null :<NotFound/>}/>
       </Routes>
       <Footer />
     </Router>

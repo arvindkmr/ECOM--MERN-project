@@ -17,7 +17,7 @@ const Header = () => {
       <Link className="productCard" to={`/test`}>
         Contact
       </Link>
-      <Link className="productCard" to={`/testCrossCheck`}>
+      <Link className="productCard" to={`/products`}>
         Products
       </Link>
       <Link className="productCard" to={`/search`}>
@@ -25,6 +25,9 @@ const Header = () => {
       </Link>
       <Link className="productCard" to={`/login`}>
          Login
+      </Link>
+      <Link className="productCard" to={`/cart`}>
+         Cart
       </Link>
       
     </div>

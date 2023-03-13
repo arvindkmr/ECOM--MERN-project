@@ -2,7 +2,7 @@
   background-color: rgb(255, 255, 255);
   width: 100vw;
   max-width: 100%;
-  padding: 6vmax;
+  padding: 2vmax;
   box-sizing: border-box;
   display: flex;
 }
@@ -23,7 +23,8 @@
 }
 
 .CarouselImage {
-  /* width: 20vmax; */
+  /* width: 30vmax; */
+  /* height: 40vh; */
 }
 
 .detailsBlock-1 > h2 {

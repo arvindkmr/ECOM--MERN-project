@@ -62,7 +62,6 @@ export const getAllProduct = async (req, res, next) => {
     .search()
     .filter()
     .pagination(resultPerPage);
-    console.log(Product,"controller")
   const products = await apiFeature.query;
   res.status(200).json({ success: true, products , productsCount});
 };

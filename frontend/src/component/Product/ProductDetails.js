@@ -35,6 +35,7 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
+    
     dispatch(addItemsToCart(id, quantity));
     // alert.success("Item Added To Cart");
   };
@@ -52,19 +53,17 @@ const ProductDetails = ({ match }) => {
           <MetaData title={`${product.name} -- ECOMMERCE`} />
 
           <div className="ProductDetails">
-            <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-            </div>
+            <Carousel>
+              {product.images &&
+                product.images.map((item, i) => (
+                  <img
+                    className="CarouselImage"
+                    key={i}
+                    src={item.url}
+                    alt={`${i} Slide`}
+                  />
+                ))}
+            </Carousel>
 
             <div>
               <div className="detailsBlock-1">
@@ -117,9 +116,6 @@ const ProductDetails = ({ match }) => {
             <div className="reviews">
               {product.reviews &&
                 product.reviews.map((review) => {
-                  {
-                    /* console.log(review); */
-                  }
                   return <ReviewCard key={review._id} review={review} />;
                 })}
             </div>
