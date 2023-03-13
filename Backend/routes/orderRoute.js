@@ -10,30 +10,36 @@ import {
 
 import { authorizeRoles, isAuthenticatedUser } from '../MiddleWare/auth.js';
 
+
 const orderRoute = express.Router();
 
-orderRoute.get('/order/:id', isAuthenticatedUser, getSingleOrder);
-
+console.log("order routes")
 orderRoute.post('/order/new', isAuthenticatedUser, newOrder);
-orderRoute.get('/orders/me', isAuthenticatedUser, myOrders);
-orderRoute.get(
-  '/admin/orders',
-  isAuthenticatedUser,
-  authorizeRoles('admin'),
-  getAllOrders
-);
 
-orderRoute.put(
-  '/admin/order/:id',
-  isAuthenticatedUser,
-  authorizeRoles('admin'),
-  updateOrder
-);
-orderRoute.delete(
-  '/admin/order/:id',
-  isAuthenticatedUser,
-  authorizeRoles('admin'),
-  deleteOrder
-);
+
+
+
+// orderRoute.get('/order/:id', isAuthenticatedUser, getSingleOrder);
+
+// orderRoute.get('/orders/me', isAuthenticatedUser, myOrders);
+// orderRoute.get(
+//   '/admin/orders',
+//   isAuthenticatedUser,
+//   authorizeRoles('admin'),
+//   getAllOrders
+// );
+
+// orderRoute.put(
+//   '/admin/order/:id',
+//   isAuthenticatedUser,
+//   authorizeRoles('admin'),
+//   updateOrder
+// );
+// orderRoute.delete(
+//   '/admin/order/:id',
+//   isAuthenticatedUser,
+//   authorizeRoles('admin'),
+//   deleteOrder
+// );
 
 export default orderRoute;

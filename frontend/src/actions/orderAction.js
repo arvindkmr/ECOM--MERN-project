@@ -23,7 +23,7 @@ import {
 import axios from "axios";
 
 // Create Order
-export const createOrder = (order) => async (dispatch) => {
+export const createOrder = (orderData) => async (dispatch) => {
   
   try {
     dispatch({ type: CREATE_ORDER_REQUEST });
@@ -33,9 +33,8 @@ export const createOrder = (order) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post("/api/v1/order/new", order, config);
-    console.log("create order 1", data)
-
+    
+    const { data } = await axios.post("/api/v1/order/new", orderData, config);
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
