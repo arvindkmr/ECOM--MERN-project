@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveShippingInfo } from '../../actions/cartAction';
 import MetaData from '../layout/MetaData';
 import { Country, State } from 'country-state-city';
-// import CheckoutSteps from "../Cart/CheckoutSteps";
+import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useNavigate } from 'react-router-dom';
 const Shipping = ({ history }) => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ console.log(shippingInfo)
     <Fragment>
       <MetaData title="Shipping Details" />
 
-      {/* <CheckoutSteps activeStep={0} /> */}
+      <CheckoutSteps activeStep={0} />
 
       <div className="shippingContainer">
         <div className="shippingBox">

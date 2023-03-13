@@ -1,14 +1,14 @@
-import React, { Fragment } from "react";
-import CheckoutSteps from "../Cart/CheckoutSteps";
-import { useSelector } from "react-redux";
-import MetaData from "../layout/MetaData";
-import "./ConfirmOrder.css";
-import { Link } from "react-router-dom";
+import React, { Fragment } from 'react';
+import CheckoutSteps from '../Cart/CheckoutSteps';
+import { useSelector } from 'react-redux';
+import MetaData from '../layout/MetaData';
+import './ConfirmOrder.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-const ConfirmOrder = ({ history }) => {
+const ConfirmOrder = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -30,9 +30,9 @@ const ConfirmOrder = ({ history }) => {
       totalPrice,
     };
 
-    sessionStorage.setItem("orderInfo", JSON.stringify(data));
+    sessionStorage.setItem('orderInfo', JSON.stringify(data));
 
-    history.push("/process/payment");
+    // navigate('/process/payment');
   };
 
   return (
@@ -67,9 +67,9 @@ const ConfirmOrder = ({ history }) => {
                     <img src={item.image} alt="Product" />
                     <Link to={`/product/${item.product}`}>
                       {item.name}
-                    </Link>{" "}
+                    </Link>{' '}
                     <span>
-                      {item.quantity} X ₹{item.price} ={" "}
+                      {item.quantity} X ₹{item.price} ={' '}
                       <b>₹{item.price * item.quantity}</b>
                     </span>
                   </div>
@@ -77,7 +77,7 @@ const ConfirmOrder = ({ history }) => {
             </div>
           </div>
         </div>
-        {/*  */}
+
         <div>
           <div className="orderSummary">
             <p>Order Summery</p>
