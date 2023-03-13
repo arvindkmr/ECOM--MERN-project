@@ -1,27 +1,8 @@
 import { Order } from '../models/orderModel.js';
 import { Product } from '../models/productModel.js';
 import ErrorHandler from '../utils/errorHandler.js';
-console.log('order controller');
-// Create new Order
-export const newOrder = () => async (req, res, next) => {
-  const {
-    // orderItems,
-    // paymentInfo,
-    // 
-  } = req.body;
 
-  const order = await Order.create({
-    // orderItems,
-    // paymentInfo,
-    // paidAt: Date.now(),
-    user: req.user._id,
-  });
 
-  res.status(201).json({
-    success: true,
-    order,
-  });
-};
 
 // get Single Order
 export const getSingleOrder = () => async (req, res, next) => {

@@ -49,6 +49,61 @@ const orderSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  paymentInfo: {
+    id: {
+      type: String,
+      //       required: true,
+      default: Date.now,
+    },
+    status: {
+      type: String,
+      //       required: true,
+      // default: "",
+    },
+  },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  paidAt: {
+    type: Date,
+    required: true,
+  },
+  orderStatus: {
+    type: String,
+    required: true,
+    default: "Processing",
+  },
+  deliveredAt: Date,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }, orderItems: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+      product: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+    },
+  ],
 });
 
 export const Order = mongoose.model('Order', orderSchema);

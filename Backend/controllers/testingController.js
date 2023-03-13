@@ -3,20 +3,23 @@ import { Order } from '../models/TestingModel.js';
 export const createOrder = async (req, res, next) => {
   const {
     shippingInfo,
-    // orderItems,
-    // paymentInfo,
     itemsPrice,
     taxPrice,
     shippingPrice,
     totalPrice,
+    paymentInfo,
+    orderItems,
   } = req.body;
   const order = await Order.create({
     shippingInfo,
     itemsPrice,
+    user: req.user._id,
     taxPrice,
     shippingPrice,
     totalPrice,
-    user: req.user._id,
+    orderItems,
+    paymentInfo,
+    paidAt: Date.now(),
   });
   res.status(201).json({
     success: true,

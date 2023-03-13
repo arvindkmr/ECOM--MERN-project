@@ -13,7 +13,6 @@ import { authorizeRoles, isAuthenticatedUser } from '../MiddleWare/auth.js';
 
 const orderRoute = express.Router();
 
-console.log("order routes")
 orderRoute.post('/order/new', isAuthenticatedUser, newOrder);
 
 
