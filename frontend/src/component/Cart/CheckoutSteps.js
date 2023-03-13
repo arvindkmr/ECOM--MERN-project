@@ -1,23 +1,19 @@
 import React, { Fragment } from "react";
-import { Typography, Stepper, StepLabel, Step } from "@material-ui/core";
-import LocalShippingIcon from "@material-ui/icons/LocalShipping";
-import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import "./CheckoutSteps.css";
 
 const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
-      label: <Typography>Shipping Details</Typography>,
-      icon: <LocalShippingIcon />,
+      label: <p>Shipping Details</p>,
+      // icon: <LocalShippingIcon />,
     },
     {
-      label: <Typography>Confirm Order</Typography>,
-      icon: <LibraryAddCheckIcon />,
+      label: <p>Confirm Order</p>,
+      // icon: <LibraryAddCheckIcon />,
     },
     {
-      label: <Typography>Payment</Typography>,
-      icon: <AccountBalanceIcon />,
+      label: <p>Payment</p>,
+      // icon: <AccountBalanceIcon />,
     },
   ];
 
@@ -27,24 +23,24 @@ const CheckoutSteps = ({ activeStep }) => {
 
   return (
     <Fragment>
-      <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
+      <div style={stepStyles}>
         {steps.map((item, index) => (
-          <Step
+          <div
             key={index}
             active={activeStep === index ? true : false}
             completed={activeStep >= index ? true : false}
           >
-            <StepLabel
+            <div
               style={{
                 color: activeStep >= index ? "tomato" : "rgba(0, 0, 0, 0.649)",
               }}
               icon={item.icon}
             >
               {item.label}
-            </StepLabel>
-          </Step>
+            </div>
+          </div>
         ))}
-      </Stepper>
+      </div>
     </Fragment>
   );
 };

@@ -25,8 +25,10 @@ const Header = () => {
       <Link className="productCard" to={`/cart`}>
         Cart
         {/* <p >{cartItems?.length}</p> */}
-        Total Quanity:{' '} 
+        Total Quanity:
         <p>{cartItems?.reduce((acc, item) => acc + item.quantity,0)}</p>
+        Total price:
+        <p>{cartItems?.reduce((acc, item) => acc + item.quantity*item.price,0)}</p>
         
       </Link>
     </div>

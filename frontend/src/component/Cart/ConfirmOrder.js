@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import "./ConfirmOrder.css";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
 
 const ConfirmOrder = ({ history }) => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -43,7 +42,7 @@ const ConfirmOrder = ({ history }) => {
       <div className="confirmOrderPage">
         <div>
           <div className="confirmshippingArea">
-            <Typography>Shipping Info</Typography>
+            <p>Shipping Info</p>
             <div className="confirmshippingAreaBox">
               <div>
                 <p>Name:</p>
@@ -60,7 +59,7 @@ const ConfirmOrder = ({ history }) => {
             </div>
           </div>
           <div className="confirmCartItems">
-            <Typography>Your Cart Items:</Typography>
+            <p>Your Cart Items:</p>
             <div className="confirmCartItemsContainer">
               {cartItems &&
                 cartItems.map((item) => (
@@ -81,7 +80,7 @@ const ConfirmOrder = ({ history }) => {
         {/*  */}
         <div>
           <div className="orderSummary">
-            <Typography>Order Summery</Typography>
+            <p>Order Summery</p>
             <div>
               <div>
                 <p>Subtotal:</p>

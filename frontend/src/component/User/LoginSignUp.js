@@ -55,6 +55,7 @@ const LoginSignUp = ({ history, location }) => {
     }
 
     if (isAuthenticated) {
+      // console.log(redirect)
       navigate('/account');
     }
     // }, [dispatch, error, alert, history, isAuthenticated, redirect]);

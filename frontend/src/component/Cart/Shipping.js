@@ -1,22 +1,18 @@
-import React, { Fragment, useState } from "react";
-import "./Shipping.css";
-import { useSelector, useDispatch } from "react-redux";
-import { saveShippingInfo } from "../../actions/cartAction";
-import MetaData from "../layout/MetaData";
-import PinDropIcon from "@material-ui/icons/PinDrop";
-import HomeIcon from "@material-ui/icons/Home";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import PublicIcon from "@material-ui/icons/Public";
-import PhoneIcon from "@material-ui/icons/Phone";
-import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
-import { Country, State } from "country-state-city";
-import { useAlert } from "react-alert";
-import CheckoutSteps from "../Cart/CheckoutSteps";
-
+import React, { Fragment, useState } from 'react';
+import './Shipping.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveShippingInfo } from '../../actions/cartAction';
+import MetaData from '../layout/MetaData';
+import { Country, State } from 'country-state-city';
+// import CheckoutSteps from "../Cart/CheckoutSteps";
+import { useNavigate } from 'react-router-dom';
 const Shipping = ({ history }) => {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  // const alert = useAlert();
+  const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
+  // console.log(state)
+console.log(shippingInfo)
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
@@ -29,20 +25,20 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error("Phone Number should be 10 digits Long");
+      // alert.error('Phone Number should be 10 digits Long');
       return;
     }
     dispatch(
       saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
     );
-    history.push("/order/confirm");
+    navigate('/order/confirm');
   };
 
   return (
     <Fragment>
       <MetaData title="Shipping Details" />
 
-      <CheckoutSteps activeStep={0} />
+      {/* <CheckoutSteps activeStep={0} /> */}
 
       <div className="shippingContainer">
         <div className="shippingBox">
@@ -54,7 +50,6 @@ const Shipping = ({ history }) => {
             onSubmit={shippingSubmit}
           >
             <div>
-              <HomeIcon />
               <input
                 type="text"
                 placeholder="Address"
@@ -65,7 +60,6 @@ const Shipping = ({ history }) => {
             </div>
 
             <div>
-              <LocationCityIcon />
               <input
                 type="text"
                 placeholder="City"
@@ -76,7 +70,6 @@ const Shipping = ({ history }) => {
             </div>
 
             <div>
-              <PinDropIcon />
               <input
                 type="number"
                 placeholder="Pin Code"
@@ -87,7 +80,6 @@ const Shipping = ({ history }) => {
             </div>
 
             <div>
-              <PhoneIcon />
               <input
                 type="number"
                 placeholder="Phone Number"
@@ -99,8 +91,6 @@ const Shipping = ({ history }) => {
             </div>
 
             <div>
-              <PublicIcon />
-
               <select
                 required
                 value={country}
@@ -118,8 +108,6 @@ const Shipping = ({ history }) => {
 
             {country && (
               <div>
-                <TransferWithinAStationIcon />
-
                 <select
                   required
                   value={state}
