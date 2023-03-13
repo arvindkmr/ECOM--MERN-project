@@ -1,18 +1,14 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-
-import { useEffect, useLayoutEffect } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 const Header = () => {
- 
+  const { cartItems } = useSelector((state) => state.cart);
   return (
     <div className="header">
-      <Link className="productCard" to={`/testCrossCheck`}>
-        About
+      <Link className="productCard" to={`/`}>
+        Home
       </Link>
       <Link className="productCard" to={`/test`}>
         Contact
@@ -24,14 +20,18 @@ const Header = () => {
         <AiOutlineSearch />
       </Link>
       <Link className="productCard" to={`/login`}>
-         Login
+        Login
       </Link>
       <Link className="productCard" to={`/cart`}>
-         Cart
+        Cart
+        {/* <p >{cartItems?.length}</p> */}
+        Total Quanity:{' '} 
+        <p>{cartItems?.reduce((acc, item) => acc + item.quantity,0)}</p>
+        
       </Link>
-      
     </div>
   );
 };
 
+// cartItems.reduce(acc, item)=> acc + (item.quantity* item.price)
 export default Header;
