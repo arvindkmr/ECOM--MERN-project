@@ -1,31 +1,22 @@
-import React, { Fragment, useEffect, useRef } from "react";
-import CheckoutSteps from "../Cart/CheckoutSteps";
-import { useSelector, useDispatch ,useNavigate} from "react-redux";
-import MetaData from "../layout/MetaData";
-// import {
-//   CardNumberElement,
-//   CardCvcElement,
-//   CardExpiryElement,
-//   useStripe,
-//   useElements,
-// } from "@stripe/react-stripe-js";
-
-import axios from "axios";
-import "./payment.css";
-import { createOrder, clearErrors } from "../../actions/orderAction";
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import CheckoutSteps from '../Cart/CheckoutSteps';
+import { useSelector, useDispatch } from 'react-redux';
+import MetaData from '../layout/MetaData';
+import './payment.css';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { createOrder, clearErrors } from '../../actions/orderAction';
 
 const Payment = () => {
-  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-
+  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const stripe = useStripe();
-  // const elements = useElements();
   const payBtn = useRef(null);
-
+  const [cardNumber, setCardNumber] = useState();
+  const [cardName, setCardName] = useState();
+  const [cardCvv, setCardCvv] = useState();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const { error } = useSelector((state) => state.newOrder);
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
@@ -42,72 +33,64 @@ const Payment = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    // payBtn.current.disabled = true;
+    dispatch(createOrder(order));
+    navigate('/success')
+    // try {
+    //   const config = {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   };
+    //   const { data } = await axios.post(
+    //     '/api/v1/payment/process',
+    //     paymentData,
+    //     config
+    //   );
+    // const client_secret = data.client_secret;
 
-    payBtn.current.disabled = true;
+    // if (!stripe || !elements) return;
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        "/api/v1/payment/process",
-        paymentData,
-        config
-      );
+    // const result = await stripe.confirmCardPayment(client_secret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardNumberElement),
+    //     billing_details: {
+    //       name: user.name,
+    //       email: user.email,
+    //       address: {
+    //         line1: shippingInfo.address,
+    //         city: shippingInfo.city,
+    //         state: shippingInfo.state,
+    //         postal_code: shippingInfo.pinCode,
+    //         country: shippingInfo.country,
+    //       },
+    //     },
+    //   },
+    // });
 
-      const client_secret = data.client_secret;
+    // if (result.error) {
+    //   payBtn.current.disabled = false;
 
-      if (!stripe || !elements) return;
+    //   alert.error(result.error.message);
+    // } else {
+    //   if (result.paymentIntent.status === "succeeded") {
+    //     order.paymentInfo = {
+    //       id: result.paymentIntent.id,
+    //       status: result.paymentIntent.status,
+    //     };
 
-      const result = await stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details: {
-            name: user.name,
-            email: user.email,
-            address: {
-              line1: shippingInfo.address,
-              city: shippingInfo.city,
-              state: shippingInfo.state,
-              postal_code: shippingInfo.pinCode,
-              country: shippingInfo.country,
-            },
-          },
-        },
-      });
-
-      if (result.error) {
-        payBtn.current.disabled = false;
-
-        alert.error(result.error.message);
-      } else {
-        if (result.paymentIntent.status === "succeeded") {
-          order.paymentInfo = {
-            id: result.paymentIntent.id,
-            status: result.paymentIntent.status,
-          };
-
-          dispatch(createOrder(order));
-
-          history.push("/success");
-        } else {
-          alert.error("There's some issue while processing payment ");
-        }
-      }
-    } catch (error) {
-      payBtn.current.disabled = false;
-      alert.error(error.response.data.message);
-    }
+    //     history.push("/success");
+    //   } else {
+    //     alert.error("There's some issue while processing payment ");
+    //   }
+    // }
+    // } catch (error) {
+    //   payBtn.current.disabled = false;
+    //   // alert.error(error.response.data.message);
+    // }
   };
 
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-  }, [dispatch, error, alert]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <Fragment>
@@ -115,20 +98,36 @@ const Payment = () => {
       <CheckoutSteps activeStep={2} />
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Typography>Card Info</Typography>
+          <p>Card Info</p>
           <div>
-            <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
+            <input
+              type="number"
+              maxLength={5}
+              placeholder="Enter card details"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              className="paymentInput"
+            />
           </div>
           <div>
-            <EventIcon />
-            <CardExpiryElement className="paymentInput" />
+            <input
+              type="text"
+              maxLength={5}
+              placeholder="Card Holder Name"
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+              className="paymentInput"
+            />
           </div>
           <div>
-            <VpnKeyIcon />
-            <CardCvcElement className="paymentInput" />
+            <input
+              type="number"
+              value={cardCvv}
+              onChange={(e) => setCardCvv(e.target.value)}
+              className="paymentInput"
+              placeholder="Enter CVV number"
+            />
           </div>
-
           <input
             type="submit"
             value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}

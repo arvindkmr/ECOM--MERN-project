@@ -32,7 +32,7 @@ const ConfirmOrder = () => {
 
     sessionStorage.setItem('orderInfo', JSON.stringify(data));
 
-    // navigate('/process/payment');
+    navigate('/process/payment');
   };
 
   return (
@@ -103,7 +103,7 @@ const ConfirmOrder = () => {
               <span>₹{totalPrice}</span>
             </div>
 
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
+            <button onClick={proceedToPayment}>Place order</button>
           </div>
         </div>
       </div>

@@ -11,8 +11,7 @@ const Shipping = ({ history }) => {
   // const alert = useAlert();
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
-  // console.log(state)
-console.log(shippingInfo)
+  
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);

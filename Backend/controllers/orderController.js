@@ -25,7 +25,7 @@ export const newOrder = () => async (req, res, next) => {
     paidAt: Date.now(),
     user: req.user._id,
   });
-
+console.log(req.body,"backend")
   res.status(201).json({
     success: true,
     order,
