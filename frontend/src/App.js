@@ -25,6 +25,7 @@ import ConfirmOrder from './component/Cart/ConfirmOrder';
 import Payment from './component/Cart/Payment';
 import OrderSuccess from './component/Cart/OrderSuccess';
 import MyOrders from './component/Order/MyOrders';
+import OrderDetails from './component/Order/OrderDetails';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => {
@@ -62,6 +63,7 @@ const App = () => {
         <Route exact path="/process/payment" element={<ProtectedRoute component={Payment} />} />
         <Route exact path="/success" element={<ProtectedRoute component={OrderSuccess} />} />
         <Route exact path="/orders" element={<ProtectedRoute component={MyOrders} />} />
+        <Route exact path="/order/:id" element={<ProtectedRoute component={OrderDetails} />} />
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
         <Route exact path="/cart" element={< Cart/>} />
         <Route path='*' element={ window.location.pathname === "/process/payment" ? null :<NotFound/>}/>

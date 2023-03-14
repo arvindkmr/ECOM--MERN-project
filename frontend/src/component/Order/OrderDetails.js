@@ -1,27 +1,30 @@
-import React, { Fragment, useEffect } from "react";
-import "./orderDetails.css";
-import { useSelector, useDispatch } from "react-redux";
-import MetaData from "../layout/MetaData";
-import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
-import { getOrderDetails, clearErrors } from "../../actions/orderAction";
-import Loader from "../layout/Loader/Loader";
-import { useAlert } from "react-alert";
+import React, { Fragment, useEffect } from 'react';
+import './orderDetails.css';
+import { useSelector, useDispatch } from 'react-redux';
+import MetaData from '../layout/MetaData';
+import { Link } from 'react-router-dom';
+// import { Typography } from "@material-ui/core";
+import { getOrderDetails, clearErrors } from '../../actions/orderAction';
+import Loader from '../layout/Loader/Loader';
+import { useParams } from 'react-router-dom';
+// import { useAlert } from "react-alert";
 
-const OrderDetails = ({ match }) => {
+const OrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
-
+  const { id } = useParams();
+  
   const dispatch = useDispatch();
-  const alert = useAlert();
+
+  // const alert = useAlert();
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
-    dispatch(getOrderDetails(match.params.id));
-  }, [dispatch, alert, error, match.params.id]);
+    dispatch(getOrderDetails(id));
+  }, [dispatch, alert, error, id]);
   return (
     <Fragment>
       {loading ? (
@@ -31,10 +34,10 @@ const OrderDetails = ({ match }) => {
           <MetaData title="Order Details" />
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
-              <Typography component="h1">
+              <p component="h1">
                 Order #{order && order._id}
-              </Typography>
-              <Typography>Shipping Info</Typography>
+              </p>
+              <p>Shipping Info</p>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p>Name:</p>
@@ -54,21 +57,21 @@ const OrderDetails = ({ match }) => {
                   </span>
                 </div>
               </div>
-              <Typography>Payment</Typography>
+              <p>Payment</p>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p
                     className={
                       order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
-                        ? "greenColor"
-                        : "redColor"
+                      order.paymentInfo.status === 'succeeded'
+                        ? 'greenColor'
+                        : 'redColor'
                     }
                   >
                     {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
-                      ? "PAID"
-                      : "NOT PAID"}
+                    order.paymentInfo.status === 'succeeded'
+                      ? 'PAID'
+                      : 'NOT PAID'}
                   </p>
                 </div>
 
@@ -78,14 +81,14 @@ const OrderDetails = ({ match }) => {
                 </div>
               </div>
 
-              <Typography>Order Status</Typography>
+              <p>Order Status</p>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p
                     className={
-                      order.orderStatus && order.orderStatus === "Delivered"
-                        ? "greenColor"
-                        : "redColor"
+                      order.orderStatus && order.orderStatus === 'Delivered'
+                        ? 'greenColor'
+                        : 'redColor'
                     }
                   >
                     {order.orderStatus && order.orderStatus}
@@ -95,7 +98,7 @@ const OrderDetails = ({ match }) => {
             </div>
 
             <div className="orderDetailsCartItems">
-              <Typography>Order Items:</Typography>
+              <p>Order Items:</p>
               <div className="orderDetailsCartItemsContainer">
                 {order.orderItems &&
                   order.orderItems.map((item) => (
@@ -103,9 +106,9 @@ const OrderDetails = ({ match }) => {
                       <img src={item.image} alt="Product" />
                       <Link to={`/product/${item.product}`}>
                         {item.name}
-                      </Link>{" "}
+                      </Link>{' '}
                       <span>
-                        {item.quantity} X ₹{item.price} ={" "}
+                        {item.quantity} X ₹{item.price} ={' '}
                         <b>₹{item.price * item.quantity}</b>
                       </span>
                     </div>
