@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect,useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './orderDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import MetaData from '../layout/MetaData';
@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 // import { useAlert } from "react-alert";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { newReview } from '../../actions/productActions';
 
 const OrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
@@ -21,6 +22,14 @@ const OrderDetails = () => {
   const [review, setReview] = useState('');
 
   const handleClose = () => setShow(false);
+  const submitReview = () => {
+
+        const myForm = new FormData();
+    myForm.set("productId",id)
+    dispatch(newReview(myForm))
+    setShow(false);
+  };
+
   const handleShow = () => setShow(true);
   // const alert = useAlert();
 
@@ -141,8 +150,8 @@ const OrderDetails = () => {
                           <Button variant="secondary" onClick={handleClose}>
                             Close
                           </Button>
-                          <Button variant="primary" onClick={handleClose}>
-                            Save Changes
+                          <Button variant="primary" onClick={submitReview}>
+                            Submit review
                           </Button>
                         </Modal.Footer>
                       </Modal>
