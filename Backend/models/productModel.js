@@ -52,24 +52,25 @@ const productSchema = new mongoose.Schema({
       },
       rating: {
         type: Number,
-        required: true,
+        // required: true,
+        default: 'Default',
       },
       comment: {
         type: String,
-	required:true
+        default: 'Default',
+        // required:true
       },
     },
   ],
 
   user: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
-  createdAt:{
-	type:Date,
-	default: Date.now
-  }
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
-export const Product= mongoose.model("Products", productSchema)
-
+export const Product = mongoose.model('Products', productSchema);

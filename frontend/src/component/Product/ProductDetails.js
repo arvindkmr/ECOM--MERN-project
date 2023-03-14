@@ -12,16 +12,13 @@ import { addItemsToCart } from '../../actions/cartAction';
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const [open, setOpen] = useState(false);
+
 
   const { id } = useParams();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
 
-  const submitReviewToggle = () => {
-    open ? setOpen(false) : setOpen(true);
-  };
   const decreaseQuantity = () => {
     if (1 >= quantity) return;
     setQuantity((prev) => prev - 1);
@@ -35,7 +32,6 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
-    
     dispatch(addItemsToCart(id, quantity));
     // alert.success("Item Added To Cart");
   };
@@ -104,10 +100,6 @@ const ProductDetails = ({ match }) => {
               <div className="detailsBlock-4">
                 Description : <p>{product.description}</p>
               </div>
-
-              <button onClick={submitReviewToggle} className="submitReview">
-                Submit Review
-              </button>
             </div>
           </div>
           <h3 className="reviewsHeading">REVIEWS</h3>

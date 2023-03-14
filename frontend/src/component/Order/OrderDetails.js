@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect,useState } from 'react';
 import './orderDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import MetaData from '../layout/MetaData';
@@ -8,13 +8,20 @@ import { getOrderDetails, clearErrors } from '../../actions/orderAction';
 import Loader from '../layout/Loader/Loader';
 import { useParams } from 'react-router-dom';
 // import { useAlert } from "react-alert";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const OrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { id } = useParams();
-  
+
   const dispatch = useDispatch();
 
+  const [show, setShow] = useState(false);
+  const [review, setReview] = useState('');
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   // const alert = useAlert();
 
   useEffect(() => {
@@ -34,14 +41,12 @@ const OrderDetails = () => {
           <MetaData title="Order Details" />
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
-              <p component="h1">
-                Order #{order && order._id}
-              </p>
+              <p component="h1">Order #{order && order._id}</p>
               <p>Shipping Info</p>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p>Name:</p>
-                  <span>{order.user && order.user.name}</span>
+                  <span>{order?.user && order.user.name}</span>
                 </div>
                 <div>
                   <p>Phone:</p>
@@ -111,6 +116,36 @@ const OrderDetails = () => {
                         {item.quantity} X ₹{item.price} ={' '}
                         <b>₹{item.price * item.quantity}</b>
                       </span>
+                      <Button
+                        style={{ marginLeft: '20px' }}
+                        variant="primary"
+                        onClick={handleShow}
+                        className="submitReview"
+                      >
+                        Submit Review
+                      </Button>
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Submit Review</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <textarea
+                            type="text"
+                            name="name"
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
+                            placeholder="Type review here"
+                          />
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button variant="primary" onClick={handleClose}>
+                            Save Changes
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </div>
                   ))}
               </div>
