@@ -10,8 +10,8 @@ const Header = () => {
       <Link className="productCard" to={`/`}>
         Home
       </Link>
-      <Link className="productCard" to={`/test`}>
-        Contact
+      <Link className="productCard" to={`/orders`}>
+        orders
       </Link>
       <Link className="productCard" to={`/products`}>
         Products
