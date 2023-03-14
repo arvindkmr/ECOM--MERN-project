@@ -23,10 +23,10 @@ const OrderDetails = () => {
 
   const handleClose = () => setShow(false);
   const submitReview = () => {
-
-        const myForm = new FormData();
-    myForm.set("productId",id)
-    dispatch(newReview(myForm))
+    const myForm = new FormData();
+    myForm.set('productId', id);
+    myForm.set('review', review);
+    dispatch(newReview(myForm));
     setShow(false);
   };
 
