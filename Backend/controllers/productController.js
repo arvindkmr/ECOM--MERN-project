@@ -1,4 +1,4 @@
-import { Product } from "../models/productModel.js"
+import { Product } from '../models/productModel.js';
 import ApiFeatures from '../utils/apiFeatures.js';
 import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
@@ -11,7 +11,6 @@ export const createProduct = async (req, res, next) => {
   });
 };
 
-//unhandled promise rejection
 //update product for Admin only
 export const updateProduct = async (req, res, next) => {
   const id = req.params.id;
@@ -63,5 +62,95 @@ export const getAllProduct = async (req, res, next) => {
     .filter()
     .pagination(resultPerPage);
   const products = await apiFeature.query;
-  res.status(200).json({ success: true, products , productsCount});
+  res.status(200).json({ success: true, products, productsCount });
+};
+
+// Delete Review
+export const deleteReview = async (req, res, next) => {
+  const product = await Product.findById(req.query.productId);
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  const reviews = product.reviews.filter(
+    (rev) => rev._id.toString() !== req.query.id.toString()
+  );
+
+  let avg = 0;
+
+  reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  let ratings = 0;
+
+  if (reviews.length === 0) {
+    ratings = 0;
+  } else {
+    ratings = avg / reviews.length;
+  }
+
+  const numOfReviews = reviews.length;
+
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      ratings,
+      numOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+  });
+};
+
+// Get All Reviews of a product
+export const getProductReviews = async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
+  });
+};
+
+// Create New Review or Update the review
+export const createProductReview = async (req, res, next) => {
+  const { productId } = req.body;
+
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+  };
+
+  const product = await Product.findById(productId);
+  product.reviews.push(review);
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+  });
+};
+
+// Get All Product (Admin)
+export const getAdminProducts = async (req, res, next) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
 };
