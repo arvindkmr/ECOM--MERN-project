@@ -40,25 +40,11 @@ const productSchema = new mongoose.Schema({
     required: [4, 'stock cannot exceed 4 character'],
     default: 1,
   },
-  numOfReviews: {
-    type: Number,
-    default: 0,
-  },
   reviews: [
     {
       name: {
         type: String,
         required: true,
-      },
-      rating: {
-        type: Number,
-        // required: true,
-        default: 'Default',
-      },
-      comment: {
-        type: String,
-        default: 'Default',
-        // required:true
       },
     },
   ],

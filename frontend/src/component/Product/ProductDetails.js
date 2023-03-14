@@ -66,12 +66,6 @@ const ProductDetails = ({ match }) => {
                 <h2>{product.name}</h2>
                 <p>Product # {product._id}</p>
               </div>
-              <div className="detailsBlock-2">
-                <span className="detailsBlock-2-span">
-                  {' '}
-                  (Reviews = {product.numOfReviews} /5)
-                </span>
-              </div>
               <div className="detailsBlock-3">
                 <h1>{`₹${product.price}`}</h1>
                 <div className="detailsBlock-3-1">

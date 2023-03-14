@@ -7,7 +7,6 @@ const ReviewCard = ({ review }) => {
     helo
       <img src={profilePng} alt="User" />
       <p>{review.name}</p>
-      <span className="reviewCardComment">{review.comment}</span>
     </div>
   );
 };
