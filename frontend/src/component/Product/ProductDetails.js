@@ -13,7 +13,6 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-
   const { id } = useParams();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -102,6 +101,8 @@ const ProductDetails = ({ match }) => {
             <div className="reviews">
               {product.reviews &&
                 product.reviews.map((review) => {
+                  console.log(review);
+                  
                   return <ReviewCard key={review._id} review={review} />;
                 })}
             </div>

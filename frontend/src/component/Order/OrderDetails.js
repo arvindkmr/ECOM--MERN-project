@@ -10,27 +10,31 @@ import { useParams } from 'react-router-dom';
 // import { useAlert } from "react-alert";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { newReview } from '../../actions/productActions';
+import { newReview, getAllReviews } from '../../actions/productActions';
 
 const OrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { id } = useParams();
+  const [productID, setProductID] = useState();
 
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const [review, setReview] = useState('');
 
-  const handleClose = () => setShow(false);
-  const submitReview = () => {
+  const submitReview = (productId) => {
     const myForm = new FormData();
-    myForm.set('productId', id);
+    myForm.set('productId', productID);
     myForm.set('review', review);
     dispatch(newReview(myForm));
     setShow(false);
   };
 
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setProductID(id)
+  };
   // const alert = useAlert();
 
   useEffect(() => {
@@ -115,48 +119,54 @@ const OrderDetails = () => {
               <p>Order Items:</p>
               <div className="orderDetailsCartItemsContainer">
                 {order.orderItems &&
-                  order.orderItems.map((item) => (
-                    <div key={item.product}>
-                      <img src={item.image} alt="Product" />
-                      <Link to={`/product/${item.product}`}>
-                        {item.name}
-                      </Link>{' '}
-                      <span>
-                        {item.quantity} X ₹{item.price} ={' '}
-                        <b>₹{item.price * item.quantity}</b>
-                      </span>
-                      <Button
-                        style={{ marginLeft: '20px' }}
-                        variant="primary"
-                        onClick={handleShow}
-                        className="submitReview"
-                      >
-                        Submit Review
-                      </Button>
-                      <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Submit Review</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <textarea
-                            type="text"
-                            name="name"
-                            value={review}
-                            onChange={(e) => setReview(e.target.value)}
-                            placeholder="Type review here"
-                          />
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
-                            Close
-                          </Button>
-                          <Button variant="primary" onClick={submitReview}>
-                            Submit review
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </div>
-                  ))}
+                  order.orderItems.map((item) => {
+                    {/* console.log(item); */}
+                    return (
+                      <div key={item.product}>
+                        <img src={item.image} alt="Product" />
+                        <Link to={`/product/${item.product}`}>
+                          {item.name}
+                        </Link>{' '}
+                        <span>
+                          {item.quantity} X ₹{item.price} ={' '}
+                          <b>₹{item.price * item.quantity}</b>
+                        </span>
+                        <Button
+                          style={{ marginLeft: '20px' }}
+                          variant="primary"
+                          onClick={() => handleShow(item.product)}
+                          className="submitReview"
+                        >
+                          Submit Review
+                        </Button>
+                        <Modal show={show} onHide={handleClose}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Submit Review</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <textarea
+                              type="text"
+                              name="name"
+                              value={review}
+                              onChange={(e) => setReview(e.target.value)}
+                              placeholder="Type review here"
+                            />
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                              Close
+                            </Button>
+                            <Button
+                              variant="primary"
+                              onClick={submitReview}
+                            >
+                              Submit review
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>

@@ -128,17 +128,19 @@ export const getProductReviews = async (req, res, next) => {
 
 // Create New Review or Update the review
 export const createProductReview = async (req, res, next) => {
-  const { productId } = req.body;
-console.log(req.body)
-  const review = {
+  const { productId,review } = req.body;
+  console.log(review,productId)
+  const newreview = {
     user: req.user._id,
     name: req.user.name,
+    review:review,
   };
 
   const product = await Product.findById(productId);
-  product?.reviews?.push(review);
+  
+  product.reviews.push(newreview);
 
-  await product?.save({ validateBeforeSave: false });
+  await product.save({ validateBeforeSave: false });
 
   res.status(200).json({
     success: true,

@@ -31,7 +31,7 @@ productRoute.get(
   getAdminProducts
 );
 
-productRoute.put('/review', isAuthenticatedUser, createProductReview);
+productRoute.post('/review', isAuthenticatedUser, createProductReview);
 
 productRoute.get('/reviews', getProductReviews);
 productRoute.delete('/reviews', isAuthenticatedUser, deleteReview);
