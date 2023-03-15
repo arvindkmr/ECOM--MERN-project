@@ -85,6 +85,15 @@ const UpdatePassword = () => {
                   className="updatePasswordBtn"
                 />
               </form>
+               <form style={{padding:"2vmax", textAlign:"center"}}>
+                <input
+                  // type="submit"
+                  value="Back to Home"
+                  style={{textAlign:"center"}}
+                  className="updateProfileBtn"
+                  onClick={() => navigate('/')}
+                />
+              </form>
             </div>
           </div>
         </Fragment>

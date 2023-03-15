@@ -14,7 +14,7 @@ const UpdateProfile = () => {
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  
+
   const updateProfileSubmit = (e) => {
     e.preventDefault();
     const myForm = new FormData();
@@ -86,6 +86,15 @@ const UpdateProfile = () => {
                   type="submit"
                   value="Update"
                   className="updateProfileBtn"
+                />
+              </form>
+              <form style={{padding:"2vmax", textAlign:"center"}}>
+                <input
+                  // type="submit"
+                  value="Back to Home"
+                  style={{textAlign:"center"}}
+                  className="updateProfileBtn"
+                  onClick={() => navigate('/')}
                 />
               </form>
             </div>

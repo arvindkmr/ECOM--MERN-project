@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const UserOptions = ({ user }) => {
   // const { cartItems } = useSelector((state) => state.cart);
-  
 
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const UserOptions = ({ user }) => {
     dispatch(logout());
   }
   function profile() {
-    // dispatch(logout())
+    navigate('/account');
   }
   return (
     <Fragment>
@@ -33,7 +32,11 @@ const UserOptions = ({ user }) => {
             </div>
           );
         })}
-        {user.role === 'admin' ? <button>admin page</button> : null}
+        {user.role === 'admin' ? (
+          <button onClick={() => navigate('/admin/dashboard')}>
+            admin page
+          </button>
+        ) : null}
       </div>
     </Fragment>
   );
