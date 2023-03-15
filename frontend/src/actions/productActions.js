@@ -78,7 +78,6 @@ export const getAdminProduct = () => async (dispatch) => {
   }
 };
 
-// Create Product
 export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
@@ -86,13 +85,12 @@ export const createProduct = (productData) => async (dispatch) => {
     const config = {
       headers: { "Content-Type": "application/json" },
     };
-console.log(productData)
-const { data } = await axios.post(
-  `/api/v1/admin/product/new`,
-  productData,
-  config
-  );
-  console.log(data)
+
+    const { data } = await axios.post(
+      `/api/v1/admin/product/new`,
+      productData,
+      config
+    );
 
     dispatch({
       type: NEW_PRODUCT_SUCCESS,
@@ -105,6 +103,7 @@ const { data } = await axios.post(
     });
   }
 };
+
 
 // Update Product
 export const updateProduct = (id, productData) => async (dispatch) => {

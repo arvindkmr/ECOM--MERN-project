@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema({
       },
       url: {
         type: String,
+        default:"https://unsplash.com/photos/wQLAGv4_OYs"
         // required: true,
       },
     },
@@ -44,11 +45,11 @@ const productSchema = new mongoose.Schema({
     {
       name: {
         type: String,
-        required: true,
+        // required: true,
       },
       review:{
         type:String,
-        required: true,
+        // required: true,
       }
     },
   ],

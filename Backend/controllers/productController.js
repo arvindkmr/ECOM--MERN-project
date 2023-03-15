@@ -3,6 +3,7 @@ import ApiFeatures from '../utils/apiFeatures.js';
 import ErrorHandler from '../utils/errorHandler.js';
 //create product - By admin Only
 export const createProduct = async (req, res, next) => {
+  
   req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
