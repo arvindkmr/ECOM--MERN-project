@@ -55,9 +55,9 @@ const NewProduct = ({ history }) => {
     myForm.set("category", category);
     myForm.set("Stock", Stock);
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
+    // images.forEach((image) => {
+    //   myForm.append("images", image);
+    // });
     dispatch(createProduct(myForm));
   };
 
@@ -143,7 +143,7 @@ const NewProduct = ({ history }) => {
               />
             </div>
 
-            <div id="createProductFormFile">
+            {/* <div id="createProductFormFile">
               <input
                 type="file"
                 name="avatar"
@@ -151,13 +151,13 @@ const NewProduct = ({ history }) => {
                 onChange={createProductImagesChange}
                 multiple
               />
-            </div>
+            </div> */}
 
-            <div id="createProductFormImage">
+            {/* <div id="createProductFormImage">
               {imagesPreview.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
               ))}
-            </div>
+            </div> */}
 
             <button
               id="createProductBtn"
