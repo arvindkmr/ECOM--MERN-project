@@ -8,7 +8,6 @@ import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useNavigate } from 'react-router-dom';
 const Shipping = ({ history }) => {
   const dispatch = useDispatch();
-  // const alert = useAlert();
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
   

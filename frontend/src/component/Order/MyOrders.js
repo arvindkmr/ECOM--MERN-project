@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import './myOrders.css';
-
-import { DataGrid } from '@material-ui/data-grid';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors, myOrders } from '../../actions/orderAction';
 import Loader from '../layout/Loader/Loader';
@@ -11,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const MyOrders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const alert = useAlert();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const { user } = useSelector((state) => state.user);
@@ -26,7 +23,7 @@ const MyOrders = () => {
     }
 
     dispatch(myOrders());
-  }, [dispatch, alert, error]);
+  }, [dispatch, error]);
 
   return (
     <Fragment>

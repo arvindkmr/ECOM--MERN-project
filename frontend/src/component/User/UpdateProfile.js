@@ -44,7 +44,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, alert, user, isUpdated]);
+  }, [dispatch, error,  user, isUpdated]);
   return (
     <Fragment>
       {loading ? (

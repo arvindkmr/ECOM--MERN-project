@@ -1,23 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
-import MetaData from "../layout/MetaData";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import PersonIcon from "@material-ui/icons/Person";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import SideBar from "./Sidebar";
-import { UPDATE_USER_RESET } from "../../constants/userConstants";
+import React, { Fragment, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import SideBar from './Sidebar';
+import { UPDATE_USER_RESET } from '../../constants/userConstants';
 import {
   getUserDetails,
   updateUser,
   clearErrors,
-} from "../../actions/userAction";
-import Loader from "../layout/Loader/Loader";
+} from '../../actions/userAction';
+import Loader from '../layout/Loader/Loader';
+import MetaData from '../layout/MetaData';
 
 const UpdateUser = ({ history, match }) => {
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
@@ -27,9 +21,9 @@ const UpdateUser = ({ history, match }) => {
     isUpdated,
   } = useSelector((state) => state.profile);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
 
   const userId = match.params.id;
 
@@ -42,30 +36,30 @@ const UpdateUser = ({ history, match }) => {
       setRole(user.role);
     }
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      // alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("User Updated Successfully");
-      history.push("/admin/users");
+      // alert.success("User Updated Successfully");
+      history.push('/admin/users');
       dispatch({ type: UPDATE_USER_RESET });
     }
-  }, [dispatch, alert, error, history, isUpdated, updateError, user, userId]);
+  }, [dispatch, error, history, isUpdated, updateError, user, userId]);
 
   const updateUserSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
 
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("role", role);
+    myForm.set('name', name);
+    myForm.set('email', email);
+    myForm.set('role', role);
 
     dispatch(updateUser(userId, myForm));
   };
@@ -86,7 +80,7 @@ const UpdateUser = ({ history, match }) => {
               <h1>Update User</h1>
 
               <div>
-                <PersonIcon />
+                Person Icon
                 <input
                   type="text"
                   placeholder="Name"
@@ -96,7 +90,7 @@ const UpdateUser = ({ history, match }) => {
                 />
               </div>
               <div>
-                <MailOutlineIcon />
+                Mail Outline Icon 
                 <input
                   type="email"
                   placeholder="Email"
@@ -107,7 +101,7 @@ const UpdateUser = ({ history, match }) => {
               </div>
 
               <div>
-                <VerifiedUserIcon />
+                Verified User Icon
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Choose Role</option>
                   <option value="admin">Admin</option>
@@ -115,15 +109,15 @@ const UpdateUser = ({ history, match }) => {
                 </select>
               </div>
 
-              <Button
+              <button
                 id="createProductBtn"
                 type="submit"
                 disabled={
-                  updateLoading ? true : false || role === "" ? true : false
+                  updateLoading ? true : false || role === '' ? true : false
                 }
               >
                 Update
-              </Button>
+              </button>
             </form>
           )}
         </div>

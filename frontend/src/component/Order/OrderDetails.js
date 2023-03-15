@@ -3,11 +3,9 @@ import './orderDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import MetaData from '../layout/MetaData';
 import { Link } from 'react-router-dom';
-// import { Typography } from "@material-ui/core";
 import { getOrderDetails, clearErrors } from '../../actions/orderAction';
 import Loader from '../layout/Loader/Loader';
 import { useParams } from 'react-router-dom';
-// import { useAlert } from "react-alert";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { newReview, getAllReviews } from '../../actions/productActions';
@@ -35,8 +33,6 @@ const OrderDetails = () => {
     setShow(true);
     setProductID(id)
   };
-  // const alert = useAlert();
-
   useEffect(() => {
     if (error) {
       // alert.error(error);
@@ -44,7 +40,7 @@ const OrderDetails = () => {
     }
 
     dispatch(getOrderDetails(id));
-  }, [dispatch, alert, error, id]);
+  }, [dispatch,  error, id]);
   return (
     <Fragment>
       {loading ? (

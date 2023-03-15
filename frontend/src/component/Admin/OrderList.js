@@ -1,13 +1,8 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
-import MetaData from "../layout/MetaData";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import {
   deleteOrder,
@@ -15,11 +10,9 @@ import {
   clearErrors,
 } from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
-
+import MetaData from "../layout/MetaData";
 const OrderList = ({ history }) => {
   const dispatch = useDispatch();
-
-  const alert = useAlert();
 
   const { error, orders } = useSelector((state) => state.allOrders);
 
@@ -31,23 +24,23 @@ const OrderList = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      // alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Order Deleted Successfully");
+      // alert.success("Order Deleted Successfully");
       history.push("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
 
     dispatch(getAllOrders());
-  }, [dispatch, alert, error, deleteError, history, isDeleted]);
+  }, [dispatch, error, deleteError, history, isDeleted]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
@@ -90,16 +83,16 @@ const OrderList = ({ history }) => {
         return (
           <Fragment>
             <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
-              <EditIcon />
+              Edit
             </Link>
 
-            <Button
+            <button
               onClick={() =>
                 deleteOrderHandler(params.getValue(params.id, "id"))
               }
             >
-              <DeleteIcon />
-            </Button>
+              Delete
+            </button>
           </Fragment>
         );
       },
@@ -127,14 +120,6 @@ const OrderList = ({ history }) => {
         <div className="productListContainer">
           <h1 id="productListHeading">ALL ORDERS</h1>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
         </div>
       </div>
     </Fragment>

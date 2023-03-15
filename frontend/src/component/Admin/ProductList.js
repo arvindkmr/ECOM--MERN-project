@@ -1,25 +1,19 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
   getAdminProduct,
   deleteProduct,
-} from "../../actions/productAction";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
-import MetaData from "../layout/MetaData";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+} from "../../actions/productActions";
 import SideBar from "./Sidebar";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+import { Link } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 
 const ProductList = ({ history }) => {
   const dispatch = useDispatch();
 
-  const alert = useAlert();
 
   const { error, products } = useSelector((state) => state.products);
 
@@ -33,23 +27,23 @@ const ProductList = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      // alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Product Deleted Successfully");
+      // alert.success("Product Deleted Successfully");
       history.push("/admin/dashboard");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
 
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error, deleteError, history, isDeleted]);
+  }, [dispatch, error, deleteError, history, isDeleted]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -87,16 +81,16 @@ const ProductList = ({ history }) => {
         return (
           <Fragment>
             <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
-              <EditIcon />
+              Edit Icon
             </Link>
 
-            <Button
+            <button
               onClick={() =>
                 deleteProductHandler(params.getValue(params.id, "id"))
               }
             >
-              <DeleteIcon />
-            </Button>
+              Delete Icon 
+            </button>
           </Fragment>
         );
       },
@@ -123,15 +117,7 @@ const ProductList = ({ history }) => {
         <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
-
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
+Data grip
         </div>
       </div>
     </Fragment>

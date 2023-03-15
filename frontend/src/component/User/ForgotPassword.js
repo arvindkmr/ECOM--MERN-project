@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  // const alert = useAlert();
   const navigate= useNavigate();
 
   const [email, setEmail] = useState('');

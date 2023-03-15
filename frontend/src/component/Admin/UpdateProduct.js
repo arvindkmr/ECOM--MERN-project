@@ -4,22 +4,14 @@ import {
   clearErrors,
   updateProduct,
   getProductDetails,
-} from "../../actions/productAction";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+} from "../../actions/productActions";
 import MetaData from "../layout/MetaData";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import DescriptionIcon from "@material-ui/icons/Description";
-import StorageIcon from "@material-ui/icons/Storage";
-import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const UpdateProduct = ({ history, match }) => {
   const dispatch = useDispatch();
-  const alert = useAlert();
-
+ 
   const { error, product } = useSelector((state) => state.productDetails);
 
   const {
@@ -61,23 +53,22 @@ const UpdateProduct = ({ history, match }) => {
       setOldImages(product.images);
     }
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      // alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Product Updated Successfully");
+      // alert.success("Product Updated Successfully");
       history.push("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [
     dispatch,
-    alert,
     error,
     history,
     isUpdated,
@@ -138,7 +129,7 @@ const UpdateProduct = ({ history, match }) => {
             <h1>Create Product</h1>
 
             <div>
-              <SpellcheckIcon />
+              Spell check Icon 
               <input
                 type="text"
                 placeholder="Product Name"
@@ -148,7 +139,7 @@ const UpdateProduct = ({ history, match }) => {
               />
             </div>
             <div>
-              <AttachMoneyIcon />
+              Money Icon 
               <input
                 type="number"
                 placeholder="Price"
@@ -159,7 +150,7 @@ const UpdateProduct = ({ history, match }) => {
             </div>
 
             <div>
-              <DescriptionIcon />
+              Description Icon 
 
               <textarea
                 placeholder="Product Description"
@@ -171,7 +162,7 @@ const UpdateProduct = ({ history, match }) => {
             </div>
 
             <div>
-              <AccountTreeIcon />
+              Account Tree Icon 
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -186,7 +177,7 @@ const UpdateProduct = ({ history, match }) => {
             </div>
 
             <div>
-              <StorageIcon />
+              Storage Icon
               <input
                 type="number"
                 placeholder="Stock"
@@ -219,13 +210,13 @@ const UpdateProduct = ({ history, match }) => {
               ))}
             </div>
 
-            <Button
+            <button
               id="createProductBtn"
               type="submit"
               disabled={loading ? true : false}
             >
               Create
-            </Button>
+            </button>
           </form>
         </div>
       </div>

@@ -4,6 +4,8 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
   position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
 .dashboardContainer {
